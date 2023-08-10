@@ -1,0 +1,157 @@
+﻿@{
+    ViewBag.Title = "Login";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #72A0C1, #ffffff);
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            max-width: 800px; /* Set a maximum width for the container */
+            margin: 0 auto; /* Center the container horizontally */
+        }
+
+        .logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .dark-circle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #191970;
+            display: inline-block;
+            margin: -30px -10px 0 -10px;
+            ;
+        }
+
+        .light-circle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #0077c0;
+            display: inline-block;
+            margin: 0 -10px 0 0px;
+            ;
+        }
+
+        .company-name {
+            font-size: 120px;
+            color: #191970;
+            font-weight: bold;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            margin: 0 -20px;
+        }
+
+        .slogan {
+            color: #000000;
+            margin-top: 0px;
+            margin-bottom: 1px;
+        }
+
+        .login-form {
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 5px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            height: 500px;
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 2px;
+        }
+
+            .input-group label {
+                font-weight: bold;
+                display: none;
+            }
+
+            .input-group input {
+                padding: 7px 10px;
+                border: 1px solid #ccc;
+                background-color: #f0f0f0;
+                width: 100%;
+                margin-top: 5px;
+                transition: background-color 0.3s ease;
+            }
+
+                .input-group input:hover {
+                    background-color: #e0e0e0;
+                }
+
+        .login-btn {
+            padding: 10px 20px;
+            background-color: #003366;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            align-self: flex-end;
+            margin-top: 10px;
+            margin-top: 20px;
+            margin-left: auto;
+        }
+
+        .signup-link {
+            font-size: 16px;
+            color: #000000;
+            text-decoration: none;
+            margin-left: auto;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+    </style>
+    @{Layout = null;}
+</head>
+<body>
+    <div class="container">
+        <a href="/signup" class="signup-link">Sign Up</a>
+        <div class="logo">
+            <h1 class="company-name" style="margin: 0 -20px;">
+                j
+                <span class="light-circle"></span>
+                <span class="dark-circle"></span>
+                le
+            </h1>
+        </div>
+        <br /><p class="slogan">Building Product Selection Platform</p>
+        <div class="login-form">
+            <form method="post" action="@Url.Action("Login", "Account")">
+                <div class="input-group">
+                    <input type="text" id="usernameOrEmail" name="usernameOrEmail" placeholder="Username or Email" required />
+                </div>
+                <div class="input-group">
+                    <input type="password" id="password" name="password" placeholder="Password" required />
+                </div>
+                <button type="submit" class="login-btn">Login</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+

@@ -1,0 +1,87 @@
+﻿@{
+    ViewBag.Title = "ProductList";
+    Layout = "~/Views/Shared/_ProductLayout.cshtml";
+    var productList = ViewBag.productsVM as List<Marketplace_OA.Models.ProductsVM>;
+    var productDetail = ViewBag.productDetailVM as List<Marketplace_OA.Models.ProductAttributeDetailVM>;
+}
+
+@Html.Partial("_ProductPartialView")
+
+
+
+<div class="">
+    <div class="row">
+
+        <div class="col-3 filter-form">
+            <div class="container">
+                <h2>FILTER PART</h2>
+                <p>@ViewBag.subCategoryId</p>
+            </div>
+
+        </div>
+
+        <div class="col-7 product-list-part">
+            <div class="container">
+                <h2>Product List part</h2>
+                <h3>@ViewBag.mainCategory > @ViewBag.subCategory</h3>
+                <div class="row">
+                    @foreach (var item in productList)
+                    {
+                        <div class="col-lg-4 col-md-6 mb-4">
+
+                            <div class="card" style="width: 18rem;">
+                                <a href="@Url.Action("ProductDetail", "Product", new { mainCategory=ViewBag.mainCategory, subCategory=ViewBag.subCategory, subCategoryId=item.CategoriesID, id = item.ProductsID})" class="text-decoration-none text-dark">
+                                    <img class="card-img-top" src="~/Images/@item.Image_URL" alt="Product image">
+                                    <div class="card-body">
+                                        <h5 class="card-title">@item.Product_Name</h5>
+                                        <p class="card-text">@item.Description</p>
+                                    </div>
+                                </a>
+                                <ul class="list-group list-group-flush">
+                                    @foreach (var itemdetail in productDetail.Where(a => a.ProductsID == item.ProductsID).Take(2))
+                                    {
+                                        <li class="list-group-item" style="border: none;">
+                                            @itemdetail.Attribute_Value @itemdetail.Attribute_Name
+                                        </li>
+                                    }
+                                </ul>
+
+                                <div class="card-body">
+                                    <input type="checkbox" class="CheckedProduct" value="@item.ProductsID" />  Compare
+                                </div>
+                            </div>
+
+                        </div>
+                    }
+                </div>
+                <div>
+                    <button class="btn btn-info" id="CheckedProductButton">Compare</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@section Scripts {
+
+    <script>document.addEventListener('DOMContentLoaded', function () {
+            var compareButton = document.getElementById('CheckedProductButton');
+            compareButton.addEventListener('click', function () {
+                console.log("click button")
+                var checkedProductId = [];
+                var checkedbox = document.querySelectorAll('.CheckedProduct:checked');
+                checkedbox.forEach(function (box) {
+                    checkedProductId.push(box.value);
+                });
+                if (checkedProductId.length == 0) {
+                    alert('Select one or more to compare');
+                    return;
+                }
+
+                window.location.assign('/Product/ProductCompare?ids=' + checkedProductId.join(','));
+
+            })
+        })</script>
+}
+

@@ -1,0 +1,105 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Box</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- jQuery UI CSS -->
+    <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet">
+
+    <!-- Font Awesome for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #72A0C1, #ffffff);
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            max-width: 800px; /* Set a maximum width for the container */
+            margin: 0 auto; /* Center the container horizontally */
+        }
+
+        .logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .dark-circle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #191970;
+            display: inline-block;
+            margin: -30px -10px 0 -10px;
+        }
+
+        .light-circle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #0077c0;
+            display: inline-block;
+            margin: 0 -10px 0 0px;
+        }
+
+        .company-name {
+            font-size: 120px;
+            color: #191970;
+            font-weight: bold;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            margin: 0 -20px;
+        }
+
+        .slogan {
+            color: #000000;
+            margin-top: 0px;
+            margin-bottom: 1px;
+        }
+
+        /* style for search page button */
+        #dropdownMenuButton {
+            background-color: #1B6B93;
+            color: #20262E;
+            border: none;
+            border-radius: 5px;
+        }
+
+        #searchButton {
+            background-color: #1B6B93;
+            border: none;
+            border-radius: 5px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+

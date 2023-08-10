@@ -1,0 +1,78 @@
+﻿@{
+    ViewBag.Title = "ProductDetail";
+    Layout = "~/Views/Shared/_ProductLayout.cshtml";
+    var productList = ViewBag.ProductAttributes as List<Marketplace_OA.Models.ProductAttributesVM>;
+    var productValues = ViewBag.ProductDetail as List<Marketplace_OA.Models.ProductAttributeDetailVM>;
+}
+
+@Html.Partial("_ProductPartialView")
+
+
+
+<div class="container container3">
+    <h2>Product Summary</h2>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <!-- Table for product description -->
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>DESCRIPTION</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th class="table-secondary custom-th-width">Description</th>
+                        <td>@productValues.First().Description</td>
+                    </tr>
+                </tbody>
+
+            </table>
+            <!-- Table for text attributes -->
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>TYPE</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in productList.Where(a => a.Value_Type == "Text"))
+                    {
+                        <tr>
+                            <th class="table-secondary custom-th-width">@Html.DisplayFor(_ => item.Attribute_Name)</th>
+                            <td>@Html.DisplayFor(_ => item.Attribute_Value)</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div class="col-sm-6">
+            <!-- Table for number attributes -->
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>TECH SPECIFICATION</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in productList.Where(a => a.Value_Type == "Number"))
+                    {
+                        <tr>
+                            <th class="table-secondary custom-th-width">@Html.DisplayFor(_ => item.Attribute_Name)</th>
+                            <td>@Html.DisplayFor(_ => item.Attribute_Value)</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div>
+        <a href="@Url.Action("ProductList", "Product", new { mainCategory=ViewBag.mainCategory, subCategory=ViewBag.subCategory, subCategoryId=ViewBag.subCategoryId })"
+           class="btn btn-info">
+            Go to List
+        </a>
+    </div>
+</div>
+
