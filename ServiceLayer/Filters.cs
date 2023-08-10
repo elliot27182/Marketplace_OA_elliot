@@ -51,7 +51,7 @@ namespace ServiceLayer.Models
                 }
             }
         }
-        public DataTable GetFilteredProducts(int subcategoryId, List<FilterCriteria> filters)
+        public IEnumerable<ProductAttributeDetail> GetFilteredProducts(int subcategoryId, List<FilterCriteria> filters)
             {
             
            
@@ -82,8 +82,26 @@ namespace ServiceLayer.Models
 
                         SqlDataAdapter adapter = new SqlDataAdapter(cmd);
                         DataTable result = new DataTable();
-                        var test = adapter.Fill(result);
-                        return result;
+                        adapter.Fill(result);
+
+                    List<ProductAttributeDetail> productAttributes = result.AsEnumerable()
+                    .Select(row => new ProductAttributeDetail
+                    {
+                        ProductsID = Convert.ToInt32(row["ProductsID"]),
+                        Product_Name = row["Product_Name"].ToString(),
+                        Description = row["Description"].ToString(),
+                        CategoriesID = Convert.ToInt32(row["CategoriesID"]),
+                        AttributesID = Convert.ToInt32(row["AttributesID"]),
+                        Attribute_Name = row["Attribute_Name"].ToString(),
+                        Attribute_ValuesID = Convert.ToInt32(row["Attribute_ValuesID"]),
+                        Attribute_Value = row["Attribute_Value"].ToString(),
+                        Image_URL = row["Image_URL"].ToString()
+
+                    })
+            .ToList();
+
+                    return productAttributes;
+                    
                     }
                 }
             }
@@ -127,10 +145,12 @@ namespace ServiceLayer.Models
             fp.ProductsID, 
             p.Product_Name, 
             p.Description, 
-            P.CategoriesID,
+			P.CategoriesID,
+			p.Image_URL,
             a.AttributesID, 
             a.Attribute_Name,
-            av.Attribute_Value
+            av.Attribute_Value,
+			av.Attribute_ValuesID
         FROM 
             FilteredProducts fp
         INNER JOIN 

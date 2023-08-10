@@ -11,7 +11,7 @@ namespace RepositoryLayer.Repositories
 {
     public class Filters
     {
-        public DataTable GetFilteredProducts(List<FilterCriteria> filters, int subcategoryId)
+        public IEnumerable<ProductAttributeDetail> GetFilteredProducts(List<FilterCriteria> filters, int subcategoryId)
         {
             string dynamicSQL = GenerateDynamicSQL(filters, subcategoryId);
 
@@ -38,7 +38,24 @@ namespace RepositoryLayer.Repositories
                     DataTable result = new DataTable();
                     adapter.Fill(result);
 
-                    return result;
+
+                    List<ProductAttributeDetail> productAttributes = result.AsEnumerable()
+                    .Select(row => new ProductAttributeDetail
+                    {
+                    ProductsID = Convert.ToInt32(row["ProductsID"]),
+                    Product_Name = row["Product_Name"].ToString(),
+                    Description = row["Description"].ToString(),
+                    CategoriesID = Convert.ToInt32(row["CategoriesID"]),
+                    AttributesID = Convert.ToInt32(row["AttributesID"]),
+                    Attribute_Name = row["Attribute_Name"].ToString(),
+                    Attribute_ValuesID = Convert.ToInt32(row["Attribute_ValuesID"]),
+                    Attribute_Value = row["Attribute_Value"].ToString(),
+                    Image_URL = row["Image_URL"].ToString()
+                    
+            })
+            .ToList();
+
+                    return productAttributes;
                 }
             }
         }
@@ -82,9 +99,12 @@ namespace RepositoryLayer.Repositories
             fp.ProductsID, 
             p.Product_Name, 
             p.Description, 
+			P.CategoriesID,
+			p.Image_URL,
             a.AttributesID, 
             a.Attribute_Name,
-            av.Attribute_Value
+            av.Attribute_Value,
+			av.Attribute_ValuesID
         FROM 
             FilteredProducts fp
         INNER JOIN 

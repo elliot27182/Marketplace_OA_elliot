@@ -240,7 +240,7 @@ namespace Marketplace_OA.Controllers
                 
             var table = filters.GetFilteredProducts(subCategoryId, filter);
             //var test = filters.TestSimpleQuery();
-            return View();
+            return View(table);
         }
 
         public ActionResult GetAttributes(int subCategoryId = 1)
