@@ -256,6 +256,7 @@ namespace Marketplace_OA.Controllers
                     min_value = attribute.min_value,
                     max_value  = attribute.max_value,
                     Value_Type  = attribute.Value_Type,
+                    CategoriesID = attribute.CategoriesID,
                 });
             }
 
