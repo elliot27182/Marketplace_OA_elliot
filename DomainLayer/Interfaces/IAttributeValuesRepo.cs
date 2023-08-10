@@ -10,7 +10,7 @@ namespace DomainLayer.Interfaces
 
     public interface IAttributesValuesRepo : IGenericRepo<Attribute_Values>
     {
-
+        
     }
 
 }

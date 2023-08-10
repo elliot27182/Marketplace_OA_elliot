@@ -26,6 +26,8 @@ namespace Marketplace_OA.Controllers
 
         //code for product attributes
         public IProductAttributesService ProductAttributesService;
+
+        public IAttributesService _attributesService;
         private Mapper mapper;
 
         public ProductController()
@@ -35,6 +37,7 @@ namespace Marketplace_OA.Controllers
             _mainCategoriesService = new MCService();
             _categoriesService = new MCService();
             _productsService = new MCService();
+            _attributesService = new MCService();
 
 
             //using automapper 
@@ -86,6 +89,9 @@ namespace Marketplace_OA.Controllers
             return View();
 
         }
+
+        
+
 
         public ActionResult ProductCompare(string ids)
         {
@@ -220,17 +226,41 @@ namespace Marketplace_OA.Controllers
             return View();
         }
 
+        
+
         public ActionResult testFilter(List<FilterCriteria> filter)
         {
             int subCategoryId = 1;
             filter = new List<FilterCriteria>();
-            filter.Add(new FilterCriteria { AttributeId = 1, MinValue = 4, MaxValue = 32 });
-            filter.Add(new FilterCriteria { AttributeId = 2, MinValue = 12, MaxValue = 17 });
+            filter.Add(new FilterCriteria { AttributeId = 1, MinValue = 10, MaxValue = 100 });
+            filter.Add(new FilterCriteria { AttributeId = 2, MinValue = 1, MaxValue = 3 });
+            filter.Add(new FilterCriteria { AttributeId = 3, MinValue = 14, MaxValue = 20 });
+            filter.Add(new FilterCriteria { AttributeId = 4, MinValue = 11, MaxValue = 15 });
             Filters filters = new Filters();
                 
             var table = filters.GetFilteredProducts(subCategoryId, filter);
             //var test = filters.TestSimpleQuery();
             return View();
+        }
+
+        public ActionResult GetAttributes(int subCategoryId = 1)
+        {
+            var attributes = _attributesService.GetAttributesByCategoryId(subCategoryId);
+            List<AttributesVM> attributesVM = new List<AttributesVM>();
+            foreach (var attribute in attributes)
+            {
+                attributesVM.Add(new AttributesVM
+                {
+                    AttributesID = attribute.AttributesID,
+                    Attribute_Name = attribute.Attribute_Name,
+                    min_value = attribute.min_value,
+                    max_value  = attribute.max_value,
+                    Value_Type  = attribute.Value_Type,
+                });
+            }
+
+            return View(attributesVM);
+            
         }
     }
 }

@@ -14,6 +14,13 @@ namespace RepositoryLayer
         public AttributesRepo(MarketDBContext context) : base(context)
         {
         }
+
+        public IEnumerable<Attributes> GetAttributesByCategoryId(int categoriesId)
+        {
+            var attributes = Context.Set<Attributes>().Where(attribute => attribute.CategoriesID == categoriesId);
+            return attributes.ToList();
+
+        }
     }
 
 }

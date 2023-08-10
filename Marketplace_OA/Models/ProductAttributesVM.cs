@@ -14,6 +14,8 @@ namespace Marketplace_OA.Models
         public string Attribute_Value { get; set; }
         public string Value_Type { get; set; }
 
+
+
         //public string Product_Name { get; set; }
         //public string Description { get; set; }
         //public string Image_URL { get; set; }

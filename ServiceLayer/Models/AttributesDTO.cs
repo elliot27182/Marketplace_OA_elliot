@@ -9,13 +9,15 @@ namespace ServiceLayer.Models
 {
     public class AttributesDTO
     {
-        public int Attribute_ID { get; set; }
+        public int AttributesID { get; set; }
         public string Attribute_Name { get; set; }
         public Nullable<double> min_value { get; set; }
         public Nullable<double> max_value { get; set; }
         public string Value_Type { get; set; }
 
-        
+        public Nullable<int> CategoriesID { get; set; }
+
+
         public virtual ICollection<Attribute_ValuesDTO> Attribute_Values { get; set; }
         
         public virtual ICollection<Product_AttributesDTO> Product_Attributes { get; set; }

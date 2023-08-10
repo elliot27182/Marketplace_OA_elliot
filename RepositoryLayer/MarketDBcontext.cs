@@ -11,7 +11,7 @@ namespace RepositoryLayer
 {
     public class MarketDBContext : DbContext
     {
-        public MarketDBContext() : base("MarketDBContext")
+        public MarketDBContext() : base("Data source=DESKTOP-RQ3BRI1\\SQLEXPRESS;initial catalog=master;persist security info=True;user id=sa;password=000;Connect Timeout=30;MultipleActiveResultSets=true")
         {
         }
 

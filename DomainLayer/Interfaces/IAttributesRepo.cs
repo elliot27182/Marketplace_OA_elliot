@@ -11,7 +11,7 @@ namespace DomainLayer.Interfaces
 
     public interface IAttributesRepo : IGenericRepo<Attributes>
     {
-
+        IEnumerable<Attributes> GetAttributesByCategoryId(int attributeId);
     }
 
 }

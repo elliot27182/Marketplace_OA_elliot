@@ -13,7 +13,7 @@ using ServiceLayer.Models;
 
 namespace ServiceLayer
 {
-    public class MCService : IMainCategoriesService, ICategoriesService, IProductGetAttributeService
+    public class MCService : IMainCategoriesService, ICategoriesService, IProductGetAttributeService, IAttributesService
 
     {
         private readonly MarketDBContext context;
@@ -35,6 +35,8 @@ namespace ServiceLayer
 
 
         }
+
+        
 
         IEnumerable<MainCategoriesDTO> IMainCategoriesService.GetAllMainCategories()
 
@@ -88,6 +90,7 @@ namespace ServiceLayer
                     AttributesID = item.AttributesID,
                     Attribute_Name = item.Attribute_Name,
                     Attribute_Value = item.Attribute_Value,
+                    Image_URL = item.Image_URL
 
                 });
             }
@@ -117,6 +120,25 @@ namespace ServiceLayer
             return productsDTO;
         }
 
+        IEnumerable<AttributesDTO> IAttributesService.GetAttributesByCategoryId(int attributeId)
+        {
+            var Attributes = _unitOfWork.AttributesRepo.GetAttributesByCategoryId(attributeId);
+
+            List<AttributesDTO>  attributesDTO = new List<AttributesDTO>();
+
+            foreach (var attribute in Attributes)
+            {
+                attributesDTO.Add(new AttributesDTO
+                {
+                    AttributesID = attribute.AttributesID,
+                    Attribute_Name = attribute.Attribute_Name,
+                    min_value = attribute.min_value,
+                    max_value = attribute.max_value,
+                    Value_Type = attribute.Value_Type,
+                });
+            }
+            return attributesDTO;
+        }
 
         //public IEnumerable<Products> GetProductsByCategory(int CategoryId)
         //{

@@ -18,7 +18,10 @@ namespace RepositoryLayer.Repositories
         }
 
         public IEnumerable<ProductAttributeDetail> GetProductAttributeByID2(int id)
+
         {
+
+
             var result = from p in Context.Products
                          where p.ProductsID == id
                          join pa in Context.Product_Attributes on p.ProductsID equals pa.ProductsID
@@ -30,12 +33,15 @@ namespace RepositoryLayer.Repositories
                              ProductsID = p.ProductsID,
                              Product_Name = p.Product_Name,
                              Description = p.Description,
+                             Image_URL = p.Image_URL,
                              CategoriesID = (int)p.CategoriesID,
                              AttributesID = pa.AttributesID,
                              Attribute_Name = a.Attribute_Name,
                              Attribute_ValuesID = av == null ? 0 : av.Attribute_ValuesID,
-                             Attribute_Value = av == null ? string.Empty : av.Attribute_Value
+                             Attribute_Value = av == null ? string.Empty : av.Attribute_Value,
+
                          };
+
 
 
             return result.ToList();

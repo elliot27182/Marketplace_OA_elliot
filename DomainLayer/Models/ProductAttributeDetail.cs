@@ -16,5 +16,7 @@ namespace DomainLayer.Models
         public string Attribute_Name { get; set; }
         public int Attribute_ValuesID { get; set; }
         public string Attribute_Value { get; set; }
+
+        public string Image_URL { get; set; }
     }
 }

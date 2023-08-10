@@ -137,6 +137,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AttributesVM.cs" />
     <Compile Include="Models\CategoriesVM.cs" />
     <Compile Include="Models\FilterCriteriaVM.cs" />
     <Compile Include="Models\MainCategoriesVM.cs" />
@@ -209,6 +210,8 @@
     <Content Include="Views\Product\ProductCompare.cshtml" />
     <Content Include="Views\Shared\_ProductLayout.cshtml" />
     <Content Include="Views\Product\testFilter.cshtml" />
+    <Content Include="Views\Product\GetAttributes.cshtml" />
+    <Content Include="Views\Product\ProductDetail1.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
